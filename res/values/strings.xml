@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Motorvogn (Norsk)</string>
+    <string name="app_ver">Versjon 1.0a</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_manual">Manuell innskriving</string>
+    <string name="title_activity_result">Resultat</string>
+    <string name="main_bCamera">Kamera</string>
+    <string name="main_bManual">Manuell</string>
+    <string name="main_bHistory">Historikk</string>
+    <string name="main_bPreferences">Innstillinger</string>
+    <string name="main_ibGithub">Github</string>
+    <string name="main_ibEmail">E-post</string>
+    
+    <string name="manual_etVehicleNumber">ZZ9999</string>
+    <string name="manual_bReset">Reset</string>
+    <string name="manual_bSearch">Søk</string>
+    <string name="manual_txtNoInternet">Ingen nettilgang.</string>
+    <string name="manual_txtSearching">Leter etter registreringsnummer.</string>
+
+</resources>
