@@ -21,38 +21,45 @@ package no.haitech.vegvesen;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * A helper class for {@code Vehicle}
+ * Has all the mutator methods for engine displacement.
+ * 
+ * @author Thomas Le
+ * @see Vehicle
+ */
 public class Slagvolum implements Parcelable {
-    private int supplied;   // F.ex. 1905
-    private double liters;  // F.ex. 1.9
+    private int oppgitt;   // E.g. 1905
+    private double liter;  // E.g. 1.9
     
     public Slagvolum(Parcel in) {
         readFromParcel(in);
     }
 
-    public Slagvolum(int supplied, double liters) {
-        this.supplied = supplied;
-        this.liters = liters;
+    public Slagvolum(int oppgitt, double liter) {
+        this.oppgitt = oppgitt;
+        this.liter = liter;
     }
 
-    public int getSupplied() {
-        return supplied;
+    public int getOppgitt() {
+        return oppgitt;
     }
 
-    public void setSupplied(int supplied) {
-        this.supplied = supplied;
+    public void setOppgitt(int oppgitt) {
+        this.oppgitt = oppgitt;
     }
 
-    public double getLiters() {
-        return liters;
+    public double getLiter() {
+        return liter;
     }
 
-    public void setLiters(double liters) {
-        this.liters = liters;
+    public void setLiter(double liter) {
+        this.liter = liter;
     }
 
     private void readFromParcel(Parcel in) {
-        supplied = in.readInt();
-        liters = in.readDouble();
+        oppgitt = in.readInt();
+        liter = in.readDouble();
     }
     
     @Override
@@ -62,8 +69,8 @@ public class Slagvolum implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(supplied);
-        dest.writeDouble(liters);
+        dest.writeInt(oppgitt);
+        dest.writeDouble(liter);
     }
     
     public static final Parcelable.Creator<Slagvolum> CREATOR = 

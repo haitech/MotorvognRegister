@@ -21,50 +21,57 @@ package no.haitech.vegvesen;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * A helper class for {@code Vehicle}
+ * Has all the mutator methods for engine performance.
+ * 
+ * @author Thomas Le
+ * @see Vehicle
+ */
 public class Motorytelse implements Parcelable {
-    private int supplied;       // F.ex. 66
-    private String extension;   // F.ex. KW
-    private int horsePower;     // F.ex. 90
+    private int oppgitt;                // E.g. 66
+    private String oppgittBenevning;    // E.g. KW
+    private int hestekrefter;           // E.g. 90
     
     public Motorytelse(Parcel in) {
         readFromParcel(in);
     }
     
 
-    public Motorytelse(int supplied, String extension, int horsePower) {
-        this.supplied = supplied;
-        this.extension = extension;
-        this.horsePower = horsePower;
+    public Motorytelse(int oppgitt, String oppgittBenevning, int hestekrefter) {
+        this.oppgitt = oppgitt;
+        this.oppgittBenevning = oppgittBenevning;
+        this.hestekrefter = hestekrefter;
     }
 
-    public int getSupplied() {
-        return supplied;
+    public int getOppgitt() {
+        return oppgitt;
     }
 
-    public void setSupplied(int supplied) {
-        this.supplied = supplied;
+    public void setOppgitt(int oppgitt) {
+        this.oppgitt = oppgitt;
     }
 
-    public String getExtension() {
-        return extension;
+    public String getOppgittBenevning() {
+        return oppgittBenevning;
     }
 
-    public void setExtension(String extension) {
-        this.extension = extension;
+    public void setOppgittBenevning(String oppgittBenevning) {
+        this.oppgittBenevning = oppgittBenevning;
     }
 
-    public int getHorsePower() {
-        return horsePower;
+    public int getHestekrefter() {
+        return hestekrefter;
     }
 
-    public void setHorsePower(int horsePower) {
-        this.horsePower = horsePower;
+    public void setHestekrefter(int hestekrefter) {
+        this.hestekrefter = hestekrefter;
     }
 
     private void readFromParcel(Parcel in) {
-        supplied = in.readInt();
-        extension = in.readString();
-        horsePower = in.readInt();
+        oppgitt = in.readInt();
+        oppgittBenevning = in.readString();
+        hestekrefter = in.readInt();
     }
     
     @Override
@@ -74,9 +81,9 @@ public class Motorytelse implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(supplied);
-        dest.writeString(extension);
-        dest.writeInt(horsePower);
+        dest.writeInt(oppgitt);
+        dest.writeString(oppgittBenevning);
+        dest.writeInt(hestekrefter);
     }
     
     public static final Parcelable.Creator<Motorytelse> CREATOR = 
