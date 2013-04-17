@@ -53,10 +53,10 @@ public class Vehicle implements Parcelable {
     private String regnr;                   // E.g. RH 12345
     private String understellsnr;           // E.g. VF7X14B00024B0547
     private int registreringsaar;           // E.g. 1995
-    private Date forstegangsreg;            // E.g. 29.06.1995
-    private Date registrertEierDato;        // E.g. 02.01.2008
+    private Long forstegangsreg;            // E.g. 29.06.1995
+    private Long registrertEierDato;        // E.g. 02.01.2008
     private String registrertDistrikt;      // E.g. Stavanger
-    private Date avregistrertDato;          // E.g. 31.12.2012
+    private Long avregistrertDato;          // E.g. 31.12.2012
     private int egenvekt;                   // E.g. 1495
     private int totalvekt;                  // E.g. 2040
     private int lengde;                     // E.g. 480
@@ -68,13 +68,13 @@ public class Vehicle implements Parcelable {
     private String dekkdimensjonBak;        // E.g. 195/65 R 15
     private String hastighetsindeksForan;   // E.g. T (190 km/t)
     private String hastighetsindeksBak;     // E.g. Ikke oppgitt
-    private int lastindeksForan;            // E.g. 84
-    private int lastindeksBak;              // E.g. 84
+    private String lastindeksForan;         // E.g. 84
+    private String lastindeksBak;           // E.g. 84
     private String innpressForan;           // E.g. Ikke oppgitt
     private String innpressBak;             // E.g. Ikke oppgitt
-    private int antallAksler;               // E.g. Ikke oppgitt
-    private Date eukontrollfrist;           // E.g. 31.01.2013
-    private Date eukontrollSist;            // E.g. 10.12.2010
+    private String antallAksler;            // E.g. Ikke oppgitt
+    private Long eukontrollfrist;           // E.g. 31.01.2013
+    private Long eukontrollSist;            // E.g. 10.12.2010
     
     public Vehicle() {
     }
@@ -106,10 +106,10 @@ public class Vehicle implements Parcelable {
         regnr = in.readString();
         understellsnr = in.readString();
         registreringsaar = in.readInt();
-        forstegangsreg = new Date(in.readLong());
-        registrertEierDato = new Date(in.readLong());
+        forstegangsreg = new Date(in.readLong()).getTime();
+        registrertEierDato = new Date(in.readLong()).getTime();
         registrertDistrikt = in.readString();
-        avregistrertDato = new Date(in.readInt());
+        avregistrertDato = new Date(in.readLong()).getTime();
         egenvekt = in.readInt();
         totalvekt = in.readInt();
         lengde = in.readInt();
@@ -121,13 +121,13 @@ public class Vehicle implements Parcelable {
         dekkdimensjonBak = in.readString();
         hastighetsindeksForan = in.readString();
         hastighetsindeksBak = in.readString();
-        lastindeksForan = in.readInt();
-        lastindeksBak = in.readInt();
+        lastindeksForan = in.readString();
+        lastindeksBak = in.readString();
         innpressForan = in.readString();
         innpressBak = in.readString();
-        antallAksler = in.readInt();
-        eukontrollfrist = new Date(in.readLong());
-        eukontrollSist = new Date(in.readLong());
+        antallAksler = in.readString();
+        eukontrollfrist = new Date(in.readLong()).getTime();
+        eukontrollSist = new Date(in.readLong()).getTime();
     }
     
     @Override
@@ -157,10 +157,10 @@ public class Vehicle implements Parcelable {
         dest.writeString(regnr);
         dest.writeString(understellsnr);
         dest.writeInt(registreringsaar);
-        dest.writeLong(forstegangsreg.getTime());
-        dest.writeLong(registrertEierDato.getTime());
+        dest.writeLong(forstegangsreg);
+        dest.writeLong(registrertEierDato);
         dest.writeString(registrertDistrikt);
-        dest.writeLong(avregistrertDato.getTime());
+        dest.writeLong(avregistrertDato);
         dest.writeInt(egenvekt);
         dest.writeInt(totalvekt);
         dest.writeInt(lengde);
@@ -172,17 +172,18 @@ public class Vehicle implements Parcelable {
         dest.writeString(dekkdimensjonBak);
         dest.writeString(hastighetsindeksForan);
         dest.writeString(hastighetsindeksBak);
-        dest.writeInt(lastindeksForan);
-        dest.writeInt(lastindeksBak);
+        dest.writeString(lastindeksForan);
+        dest.writeString(lastindeksBak);
         dest.writeString(innpressForan);
         dest.writeString(innpressBak);
-        dest.writeInt(antallAksler);
-        dest.writeLong(eukontrollfrist.getTime());
-        dest.writeLong(eukontrollSist.getTime());
+        dest.writeString(antallAksler);
+        dest.writeLong(eukontrollfrist);
+        dest.writeLong(eukontrollSist);
     }
     
     /**
      * Mutator method for Brand.
+     * Example output: Citroen
      * 
      * @return String brand of vehicle.
      */
@@ -346,19 +347,19 @@ public class Vehicle implements Parcelable {
         this.registreringsaar = registreringsaar;
     }
 
-    public Date getForstegangsreg() {
+    public Long getForstegangsreg() {
         return forstegangsreg;
     }
 
-    public void setForstegangsreg(Date forstegangsreg) {
+    public void setForstegangsreg(Long forstegangsreg) {
         this.forstegangsreg = forstegangsreg;
     }
 
-    public Date getRegistrertEierDato() {
+    public Long getRegistrertEierDato() {
         return registrertEierDato;
     }
 
-    public void setRegistrertEierDato(Date registrertEierDato) {
+    public void setRegistrertEierDato(Long registrertEierDato) {
         this.registrertEierDato = registrertEierDato;
     }
 
@@ -370,11 +371,11 @@ public class Vehicle implements Parcelable {
         this.registrertDistrikt = registrertDistrikt;
     }
 
-    public Date getAvregistrertDato() {
+    public Long getAvregistrertDato() {
         return avregistrertDato;
     }
 
-    public void setAvregistrertDato(Date avregistrertDato) {
+    public void setAvregistrertDato(Long avregistrertDato) {
         this.avregistrertDato = avregistrertDato;
     }
 
@@ -466,19 +467,19 @@ public class Vehicle implements Parcelable {
         this.hastighetsindeksBak = hastighetsindeksBak;
     }
 
-    public int getLastindeksForan() {
+    public String getLastindeksForan() {
         return lastindeksForan;
     }
 
-    public void setLastindeksForan(int lastindeksForan) {
+    public void setLastindeksForan(String lastindeksForan) {
         this.lastindeksForan = lastindeksForan;
     }
 
-    public int getLastindeksBak() {
+    public String getLastindeksBak() {
         return lastindeksBak;
     }
 
-    public void setLastindeksBak(int lastindeksBak) {
+    public void setLastindeksBak(String lastindeksBak) {
         this.lastindeksBak = lastindeksBak;
     }
 
@@ -498,27 +499,27 @@ public class Vehicle implements Parcelable {
         this.innpressBak = innpressBak;
     }
 
-    public int getAntallAksler() {
+    public String getAntallAksler() {
         return antallAksler;
     }
 
-    public void setAntallAksler(int antallAksler) {
+    public void setAntallAksler(String antallAksler) {
         this.antallAksler = antallAksler;
     }
 
-    public Date getEukontrollfrist() {
+    public Long getEukontrollfrist() {
         return eukontrollfrist;
     }
 
-    public void setEukontrollfrist(Date eukontrollfrist) {
+    public void setEukontrollfrist(Long eukontrollfrist) {
         this.eukontrollfrist = eukontrollfrist;
     }
 
-    public Date getEukontrollSist() {
+    public Long getEukontrollSist() {
         return eukontrollSist;
     }
 
-    public void setEukontrollSist(Date eukontrollSist) {
+    public void setEukontrollSist(Long eukontrollSist) {
         this.eukontrollSist = eukontrollSist;
     }
 

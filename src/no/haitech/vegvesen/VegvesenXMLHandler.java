@@ -19,7 +19,9 @@
 package no.haitech.vegvesen;
 
 
-import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -38,8 +40,10 @@ public class VegvesenXMLHandler extends DefaultHandler {
     // Keep track of tag
     private Boolean endTag = false;
     
+    
     // Childs
     private Boolean inBrukstype = false;
+    private Boolean inSlagvolum = false;
     
     private Boolean isKjoretoy = false;
     private Boolean isInvalid = false;
@@ -65,6 +69,10 @@ public class VegvesenXMLHandler extends DefaultHandler {
             if(localName.equals("brukstype")) {
                 inBrukstype = true;
             }
+            else if(localName.equals("slagvolum")) {
+                inSlagvolum = true;
+                vehicle.setSlagvolum(new Slagvolum());
+            }
         }
     }
     
@@ -89,8 +97,24 @@ public class VegvesenXMLHandler extends DefaultHandler {
                         vehicle.setGruppe(tagValue);
                     }
                 }
-                else if(localName.equals("brukstype")) 
+                else if(localName.equals("brukstype"))
                     inBrukstype = false;
+                
+                
+                // Slagvolum
+                else if(localName.equals("oppgitt")) {
+                    if(inSlagvolum) {
+                        vehicle.getSlagvolum().setOppgitt(stringToInt(tagValue));
+                    }
+                }
+                else if(localName.equals("liter")) {
+                    if(inSlagvolum) {
+                        vehicle.getSlagvolum().setLiter(stringToDouble(tagValue));
+                    }
+                }
+                else if(localName.equals("slagvolum"))
+                    inSlagvolum = false;
+                
                 else if(localName.equals("modell")) 
                     vehicle.setModell(tagValue);
                 else if(localName.equals("type"))
@@ -98,18 +122,46 @@ public class VegvesenXMLHandler extends DefaultHandler {
                 else if(localName.equals("farge")) 
                     vehicle.setFarge(tagValue);
                 else if(localName.equals("forstegangsreg")) 
-                    vehicle.setForstegangsreg(new Date());
+                    vehicle.setForstegangsreg(stringToDateLong(tagValue));
                 else if(localName.equals("registrertEierDato")) 
-                    vehicle.setRegistrertEierDato(new Date());
+                    vehicle.setRegistrertEierDato(stringToDateLong(tagValue));
                 else if(localName.equals("avregistrertDato")) 
-                    vehicle.setAvregistrertDato(new Date());
+                    vehicle.setAvregistrertDato(stringToDateLong(tagValue));
                 else if(localName.equals("eukontrollfrist")) 
-                    vehicle.setEukontrollfrist(new Date());
+                    vehicle.setEukontrollfrist(stringToDateLong(tagValue));
                 else if(localName.equals("eukontrollSist")) 
-                    vehicle.setEukontrollSist(new Date());
+                    vehicle.setEukontrollSist(stringToDateLong(tagValue));
             }
         }
     }
+    
+    private long stringToDateLong(String s) {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy", 
+                                                                Locale.UK);
+            return format.parse(s).getTime();
+        }
+        catch(ParseException pe) {
+            return 0;
+        }
+    }
+    
+    private int stringToInt(String s) {
+        try {
+            return Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+    
+    private double stringToDouble(String s) {
+        try {
+            return Double.parseDouble(s);
+        } catch (NumberFormatException e) {
+            return 0.0;
+        }
+    }
+    
     
     @Override
     public void characters(char[] ch, int start, int length)

@@ -24,6 +24,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -34,6 +37,9 @@ import android.widget.Toast;
  *
  */
 public class ResultActivity extends Activity {
+    LinearLayout llResults;
+    LayoutParams lp;
+    TextView tvItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +55,28 @@ public class ResultActivity extends Activity {
         // Testing
         Bundle b = getIntent().getExtras();
         Vehicle v = b.getParcelable("Vehicle");
-        Toast.makeText(ResultActivity.this, v.getGruppe(),  Toast.LENGTH_LONG).show();
+        Toast.makeText(ResultActivity.this, "" + v.getMerke(),  Toast.LENGTH_LONG).show();
+        
+        llResults = (LinearLayout) findViewById(R.id.llResults);
+        
+        LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, 40);
+        tvItem = new TextView(this);
+        lp.setMargins(0, 5, 0, 5);
+        tvItem.setLayoutParams(lp);
+        tvItem.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+        tvItem.setText("hello world1");
+        llResults.addView(tvItem);
+        
+        for(int i = 2; i < 41; i++) {
+            tvItem = new TextView(this);
+            tvItem.setLayoutParams(lp);
+            tvItem.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+            tvItem.setText("hello world"+i);
+            llResults.addView(tvItem);
+        }
+
+        
+   
     }
 
     @Override

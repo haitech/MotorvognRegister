@@ -32,6 +32,9 @@ public class Slagvolum implements Parcelable {
     private int oppgitt;   // E.g. 1905
     private double liter;  // E.g. 1.9
     
+    public Slagvolum() {
+    }
+    
     public Slagvolum(Parcel in) {
         readFromParcel(in);
     }
