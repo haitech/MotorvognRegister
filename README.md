@@ -5,6 +5,10 @@ An Android application for look up vehicle identification number against Norwegi
 
 ## Changelog
 
+### 0.2
+- Added SurfaceView for Camera. Working on ANPR (Automatic Number Plate Recognition).
+- Added an Activity for Camera.
+
 ### 0.1-a1
 - Change variable names to norwegian.
 - Added some JavaDoc; Slagvolum.java and Motorytelse.java.
