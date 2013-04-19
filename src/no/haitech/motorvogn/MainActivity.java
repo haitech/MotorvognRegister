@@ -18,12 +18,7 @@
  */
 package no.haitech.motorvogn;
 
-import java.io.File;
-
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -90,15 +85,19 @@ public class MainActivity extends Activity {
      *        {@code View}.
      */
     public void cameraOnClick(View view) {
-        // Demo demo
-        Intent imageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        File imagesFolder = new File(Environment.getExternalStorageDirectory(), "MyImages");
-        imagesFolder.mkdirs(); // <----
-        File image = new File(imagesFolder, "image_001.jpg");
-        Uri uriSavedImage = Uri.fromFile(image);
-        imageIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
-        startActivityForResult(imageIntent,0);
+        Intent intent = new Intent(this, CameraActivity.class);
+        startActivity(intent);
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+        
+//        // Demo demo
+//        Intent imageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        File imagesFolder = new File(Environment.getExternalStorageDirectory(), "MyImages");
+//        imagesFolder.mkdirs(); // <----
+//        File image = new File(imagesFolder, "image_001.jpg");
+//        Uri uriSavedImage = Uri.fromFile(image);
+//        imageIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+//        startActivityForResult(imageIntent,0);
+//        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
     
     

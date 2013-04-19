@@ -12,11 +12,12 @@
     <string name="main_bPreferences">Innstillinger</string>
     <string name="main_ibGithub">Github</string>
     <string name="main_ibEmail">E-post</string>
-    
     <string name="manual_etVehicleNumber">ZZ9999</string>
     <string name="manual_bReset">Reset</string>
     <string name="manual_bSearch">Søk</string>
     <string name="manual_txtNoInternet">Ingen nettilgang.</string>
     <string name="manual_txtSearching">Leter etter registreringsnummer.</string>
+    <string name="title_activity_camera">CameraActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
